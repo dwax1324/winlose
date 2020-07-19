@@ -10,7 +10,7 @@ const Button1 = styled.button`
   cursor:pointer;
   border-radius: 7px;
   height:45px;
-
+user-select:none;
 
   &:hover{
     background-color: #1565c0;
@@ -25,7 +25,8 @@ const Button2 = styled.button`
   padding: 5px 15px;
   margin: 5px;
   color:white;
-  background-color: #d81b60
+  background-color: #d81b60;
+  user-select:none;
 
 ;
   font-family: cursive;
@@ -59,6 +60,7 @@ const Table = styled.div`
   margin-right:20px;
   font-size: 20px;
   text-shadow: 1px 1px 1px black;
+  user-select:none;
 `
 
 const Win = styled.div`
