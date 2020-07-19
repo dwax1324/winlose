@@ -96,7 +96,7 @@ export default class App extends Component{
       rate:0
     }
     setInterval(() => {
-      if ((this.state.win + this.state.lose) == 0) {
+      if ((this.state.win + this.state.lose) === 0) {
         this.setState({
           rate: 0
         })
