@@ -1,44 +1,23 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Button1 = styled.button`
-  background-color: #64b5f6;
-  outline: 0;
-  padding: 5px 15px;
-  margin: 5px;
-  color:white;
-  cursor:pointer;
-  border-radius: 7px;
-  height:45px;
-user-select:none;
-
-  &:hover{
-    background-color: #1565c0;
+const Button = styled.button`
+  margin: 10px 2px 2px 2px;
+  text-align:center;
+  width: 30px;
+  width: 30px;
+  opacity:0.5;
+  transition: all 0.3s;
+  :hover{
+    opacity:1; 
   }
-  font-family: cursive;
-  font-size:20px;
-  text-shadow: 2px 2px 2px black;
+  background-color:transparent;
+  font-size:15px;
+  border-radius:10px;
+  outline:none;
+  cursor:pointer;
 `
 
-const Button2 = styled.button`
-  outline: 0;
-  padding: 5px 15px;
-  margin: 5px;
-  color:white;
-  background-color: #d81b60;
-  user-select:none;
-
-;
-  font-family: cursive;
-  font-size:20px;
-  cursor:pointer;
-    border-radius: 7px;
-    height:45px;
-  text-shadow: 2px 2px 2px black;
-    &:hover{
-    background-color: #880e4f;
-  }
-`
 
 const Box = styled.div`
 height:100vh;
@@ -88,6 +67,37 @@ const Rate = styled.div`
   color:#f1f8e9;
 `
 
+const WinBox = styled.div`
+
+  height: 70px;
+  width: 100px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  background-color: blue;
+  flex-direction:column;
+  margin: 10px;
+  font-family:cursive;
+  border-radius:10px;
+  user-select:none;
+  
+`
+const LoseBox = styled.div`
+
+  height: 70px;
+  width: 100px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  background-color: red;
+  flex-direction:column;
+  margin: 10px;
+  font-family:cursive;
+  border-radius:10px;
+  user-select:none;
+
+`
+
 export default class App extends Component{
   constructor(props) {
     super(props);
@@ -95,7 +105,8 @@ export default class App extends Component{
       win: 0,
       lose: 0,
       total: 0,
-      rate:0
+      rate: 0,
+      return: -1
     }
     setInterval(() => {
       if ((this.state.win + this.state.lose) === 0) {
@@ -110,19 +121,44 @@ export default class App extends Component{
     }, 100);
   }
 
-  increment = () => {
+ winIncrement = () => {
     this.setState({
       win: this.state.win + 1,
       total: this.state.total + 1,
     });
+   
     
   }
-  decresement = () => {
+  winDecresement = () => {
+    if (this.state.win === 0) {
+      alert("0승 이하는 불가능합니다.");
+    } else {
+      this.setState({
+        win: this.state.win - 1,
+        total: this.state.total - 1,
+      })
+    }
+  }
+
+   loseIncrement = () => {
     this.setState({
       lose: this.state.lose + 1,
       total: this.state.total - 1,
-    })
+    });
+    
   }
+  loseDecresement = () => {
+    if (this.state.lose === 0) {
+      alert("0패 이하는 불가능합니다.");
+    } else {
+      this.setState({
+      
+        lose: this.state.lose - 1,
+        total: this.state.total + 1,
+      })
+    }
+  }
+
 
   render() {
 
@@ -149,17 +185,33 @@ export default class App extends Component{
             {this.state.total}
           </Total>
           <Rate>
-            승률: {this.state.rate.toFixed(2)}%
+            승률: {this.state.rate.toFixed(1)}%
                
           </Rate>
         </Table>
-        <Button1 onClick={this.increment}>
-          승리
-    </Button1>
-    
-        <Button2 onClick={this.decresement}>
+        <WinBox>
+            승리
+            <div>
+          <Button onClick={this.winIncrement}>
+            +
+          </Button>
+          <Button onClick={this.winDecresement}>
+            -
+          </Button>
+          </div>
+        </WinBox>
+
+        <LoseBox>
           패배
-    </Button2>
+           <div>
+          <Button onClick = {this.loseIncrement}>
+            +
+          </Button>
+          <Button onClick = {this.loseDecresement}>
+            -
+          </Button>
+        </div>
+        </LoseBox>
       </Box>
     );
   }
