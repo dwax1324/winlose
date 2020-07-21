@@ -204,10 +204,10 @@ export default class App extends Component{
         <LoseBox>
           패배
            <div>
-          <Button onClick = {this.loseIncrement}>
+          <Button onClick={this.loseIncrement}>
             +
           </Button>
-          <Button onClick = {this.loseDecresement}>
+          <Button onClick={this.loseDecresement}>
             -
           </Button>
         </div>
